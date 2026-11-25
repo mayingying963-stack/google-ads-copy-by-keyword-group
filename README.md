@@ -52,23 +52,22 @@ python scripts/export_gads_copy.py examples/hiitio-example.json --xlsx
 `python scripts/test_coverage.py` → **24/24 通过**
 
 ```
-[PASS] 合规基线        [PASS] 标题超30          [PASS] 说明超90
-[PASS] 标题重复        [PASS] 全大写拒绝         [PASS] 免邮违禁
-[PASS] 虚假陈述#1      [PASS] 危险品词          [PASS] 电话号
-[PASS] 邮箱           [PASS] 装饰符号          [PASS] 连续标点
-[PASS] 纯CTA          [PASS] 站内链接行超35      [PASS] 宣传信息<4条
-[PASS] 摘要标题非法     [PASS] 摘要值<3          [PASS] 路径超15
-[PASS] 路径含空格       [PASS] 零售模式放行免邮
-[PASS] 全大写品牌不误判  [PASS] 型号不误判         [PASS] 短语含全大写词不误判
-[PASS] 通用性:虚构品牌异行业
+[PASS] 合规基线        [PASS] 标题超30        [PASS] 说明超90
+[PASS] 标题重复        [PASS] 全大写拒绝       [PASS] 全大写品牌不误判
+[PASS] 型号不误判      [PASS] 短语含全大写词不误判 [PASS] 免邮违禁
+[PASS] 虚假陈述#1      [PASS] 危险品词        [PASS] 电话号
+[PASS] 邮箱           [PASS] 装饰符号        [PASS] 连续标点
+[PASS] 纯CTA          [PASS] 站内链接行超35    [PASS] 宣传信息<4条
+[PASS] 摘要标题非法     [PASS] 摘要值<3        [PASS] 路径超15
+[PASS] 路径含空格       [PASS] 通用性:虚构品牌异行业 [PASS] 零售模式放行免邮
 ```
 
-其中两项值得单独说明：
+其中两项最能说明设计取舍：
 
-- **全大写品牌 / 型号不误判** —— `ACME-ESPRESSO`、`HVC-1000`、`NO OCEAN FREIGHT`
-  这类合法写法不会被当成"整条全大写"拒绝，但 `FACTORY DIRECT SUPPLIER` 仍会拦截。
-- **通用性：虚构品牌 + 异行业** —— 换一个完全虚构的品牌和完全不同的行业（咖啡设备）
-  跑同一套校验仍必须通过，证明本 skill 不绑定任何具体站点或行业。
+- **`通用性:虚构品牌异行业`** — 换一个完全虚构的品牌（`ACME-ESPRESSO`）和完全不同的行业（咖啡设备）
+  跑同一套校验，必须照样通过。证明本 skill 不绑定任何具体站点或行业。
+- **`全大写品牌不误判`** — `ACME-ESPRESSO`、`HVC-1000` 这类带连字符的全大写品牌/型号必须放行；
+  但 `FACTORY DIRECT SUPPLIER` 这种多词全大写仍要拒绝。
 
 ## 文件结构
 
