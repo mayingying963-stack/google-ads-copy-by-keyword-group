@@ -162,13 +162,16 @@ def check_text_policies(group, field, text, *, wholesale_mode=True):
     issues = []
     low = text.lower()
 
-    # 全大写（允许单个词如 USA、UL、CE、OEM、BMS 等缩略语）
-    # 品牌名 / 型号常为全大写且带连字符（如 ACME-ESPRESSO、HVC-1000），不应误判。
-    # 规则：先把连字符连接的词看作整体，若整条只有 1 个"词"（品牌/型号）则放行；
-    #      2 个以上词且全部大写才判违规。
+    # 全大写判定。Google 的真实规则是"整条文案全大写"才拒，而不是"某个词大写"。
+    #   - 品牌/型号常全大写且带连字符：ACME-ESPRESSO、HVC-1000 → 放行
+    #   - Title Case 短语里个别全大写词：NO OCEAN FREIGHT 可接受 → 放行
+    #   - 缩略语：UL、CE、OEM、BMS、USA → 放行
+    #   - 真正违规：整条 ≥3 个词且几乎每个词都全大写（BEST BATTERY SUPPLIER）
     words = [w for w in re.findall(r"[A-Za-z][A-Za-z\-]{2,}", text)]
-    if len(words) > 1 and all(w.isupper() for w in words):
-        issues.append(_err(group, field, "整条全大写（Google 会拒绝）", text))
+    if len(words) >= 3:
+        upper_ratio = sum(1 for w in words if w.isupper()) / len(words)
+        if upper_ratio >= 0.8:
+            issues.append(_err(group, field, "整条全大写（Google 会拒绝）", text))
 
     # 连续标点
     if RE_MULTI_PUNCT.search(text):

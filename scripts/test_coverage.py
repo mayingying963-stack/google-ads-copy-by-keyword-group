@@ -22,6 +22,10 @@ cases = [
     ("说明超90", lambda p: p['groups'][0]['descriptions'].__setitem__(0, "Y"*91), "上限 90"),
     ("标题重复", lambda p: p['groups'][0]['headlines'].__setitem__(1, p['groups'][0]['headlines'][0]), "重复"),
     ("全大写拒绝", lambda p: p['groups'][0]['headlines'].__setitem__(2, "FACTORY DIRECT SUPPLIER"), "全大写"),
+    # 边界：全大写品牌/型号、Title Case 里个别全大写词，均不得误判为"整条全大写"
+    ("全大写品牌不误判", lambda p: p['groups'][0]['headlines'].__setitem__(2, "ACME-ESPRESSO"), None),
+    ("型号不误判", lambda p: p['groups'][0]['headlines'].__setitem__(2, "HVC-1000"), None),
+    ("短语含全大写词不误判", lambda p: p['groups'][0]['headlines'].__setitem__(2, "NO OCEAN FREIGHT"), None),
     ("免邮违禁", lambda p: p['groups'][0]['callouts'].__setitem__(0, "Free Shipping"), "免邮"),
     ("虚假陈述#1", lambda p: p['groups'][0]['headlines'].__setitem__(3, "#1 Battery Supplier"), "虚假陈述"),
     ("危险品词", lambda p: p['groups'][0]['callouts'].__setitem__(1, "Hazardous Materials"), "危险品"),

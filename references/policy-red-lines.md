@@ -48,6 +48,33 @@ Google Ads 拒稿和封户的主因。**比字符数重要得多。**
 
 校验器会误判这些吗？不会——`validate_gads_copy.py` 只抓纯装饰符号。
 
+### 全大写判定的精确边界（重要）
+
+Google 拒的是**整条文案全大写**，不是"某个词大写"。以下都**合法**，不应被判违规：
+
+```
+✅ ACME-ESPRESSO          全大写品牌 + 连字符
+✅ HVC-1000               型号
+✅ NO OCEAN FREIGHT       Title Case 短语里的全大写词
+✅ UL & CE Certified      缩略语
+✅ 48V 105Ah LiFePO4      规格型号
+```
+
+真正违规的是**成句的全大写**：
+
+```
+❌ BEST BATTERY SUPPLIER
+❌ FACTORY DIRECT SUPPLIER
+❌ MADE IN THE USA
+```
+
+校验器判据：把文案切成 ≥3 个字母词，若其中 **≥80% 的字母词是全大写** 才判违规。
+这样既能抓住真正的全大写句，又不会误杀全大写品牌名、型号和缩略语。
+
+> 这条规则是踩过坑才定下来的：早期版本只判断"≥2 个词且全大写"，
+> 结果把 `ACME-ESPRESSO` 这样的品牌名直接判死，而 `NO OCEAN FREIGHT` 这种
+> 常见合规写法也被误拦。
+
 ## 三、禁止内容 Prohibited
 
 仿冒品、危险品、武器、成人内容、赌博、未批准药品 —— 常规业务不涉及。
