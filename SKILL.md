@@ -253,3 +253,28 @@ python scripts/export_gads_copy.py copy.json --xlsx
 - `references/b2b-vs-retail-voice.md` — B2B 与零售语气差异
 - `references/policy-red-lines.md` — 政策红线完整清单
 - `references/snippet-headers.md` — 结构化摘要固定标题清单
+- `references/google-official-docs-retrieval.md` — 受限网络下取官方原文的取证顺序
+- `references/html-responsive-verification.md` — HTML 多断点验证（含 Edge headless 视口陷阱）
+
+## 两条踩过的坑（务必先读）
+
+### 1. 不要用 headless 截图判断布局坏了
+
+Edge/Chrome headless 的 `--window-size` 有**最小宽度约 510px**：
+
+| 传入 | 实际 innerWidth | 截图宽度 |
+|---|---|---|
+| 390 | **510**（被强制放大） | 390（被裁切） |
+| 360 | **510**（被强制放大） | 360 |
+
+页面按 510px 排版却只截了左边 390px，看起来像"内容被截断"，
+**实际是测量方法错了**。先用 JS 探针确认 `scrollWidth === clientWidth`
+且无越界元素，再决定改不改 CSS。要真实 390px 视口请用 Playwright
+`channel="msedge"` + `viewport={"width":390}`。
+
+### 2. 官方文档不可达时怎么取证
+
+`support.google.com` / `ads.google.com` / `google.com` 在部分网络环境整个域名
+不可达（curl 返回 `000`，不是 404）。首选 `developers.google.cn`（Google for
+Developers 中国镜像，内容是官方原文），字段规格与错误码都在 Ads API 文档里。
+详见 `references/google-official-docs-retrieval.md`。

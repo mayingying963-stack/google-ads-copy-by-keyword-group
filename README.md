@@ -79,6 +79,10 @@ references/
   b2b-vs-retail-voice.md          B2B 与零售语气差异
   policy-red-lines.md             政策红线完整清单
   snippet-headers.md              结构化摘要固定标题清单
+  google-official-docs-retrieval.md   受限网络下取官方原文的取证顺序
+  html-responsive-verification.md     HTML 多断点验证（含 Edge headless 视口陷阱）
+  google-official-docs-retrieval.md  受限网络下取官方原文的取证顺序
+  html-responsive-verification.md   HTML 多断点验证（Edge headless 视口陷阱）
 scripts/
   validate_gads_copy.py           字符数 + 政策校验器（--selftest 自检）
   export_gads_copy.py             导出 CSV / HTML / MD / XLSX
