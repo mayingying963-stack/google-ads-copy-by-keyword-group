@@ -1,0 +1,214 @@
+{
+  "brand": "HIITIO",
+  "site": "https://www.hiitio.com",
+  "target_audience": "B2B 采购经理 / 电气工程师（高压直流器件选型）",
+  "notes": "示例：两个关键词分组，展示 18 标题 / 5 说明 / 6 站内链接 / 5 宣传信息 / 2 结构化摘要 的标准产出形态。前 15 条标题为上稿用，后 3 条（16-18）为备用。",
+  "groups": [
+    {
+      "group_name": "HVDC Contactor",
+      "keywords": [
+        "hvdc contactor",
+        "high voltage dc contactor",
+        "1000v dc contactor"
+      ],
+      "headlines": [
+        "1000V DC Contactor Supplier",
+        "HVDC Contactor for EV Charging",
+        "Factory Direct, No Middleman",
+        "OEM & ODM Available",
+        "Sample Before You Order",
+        "Request a Quote Today",
+        "Get Datasheets Instantly",
+        "Talk to Our Engineers",
+        "UL & CE Certified Contactors",
+        "15 Years of Switchgear Supply",
+        "Custom Coil Voltage Options",
+        "Bulk Pricing for Distributors",
+        "Fast Lead Times from Stock",
+        "HIITIO",
+        "Speak to a Sales Engineer",
+        "Sealed Arc Chamber Design",
+        "RoHS Compliant Materials",
+        "Low Contact Resistance"
+      ],
+      "descriptions": [
+        "1000V DC contactors built for EV chargers and solar storage systems. UL and CE certified.",
+        "Factory-direct supply with OEM options. Send your spec for a quote in 1 business day.",
+        "Grade-A materials, sealed arc chamber and tested contact resistance. Datasheets available.",
+        "Supplying switchgear buyers for 15 years. Sample units available before volume orders.",
+        "Custom coil voltage and mounting options. Our engineers help you match the right model."
+      ],
+      "paths": [
+        "hvdc",
+        "contactor"
+      ],
+      "sitelinks": [
+        {
+          "text": "HVDC Contactor Models",
+          "line1": "Compare ratings and form factors",
+          "line2": "Filter by voltage and current",
+          "final_url": "/products/hvdc-contactor/"
+        },
+        {
+          "text": "Request Datasheets",
+          "line1": "Full electrical specifications",
+          "line2": "Test reports on request",
+          "final_url": "/support/datasheets/"
+        },
+        {
+          "text": "OEM & Custom Orders",
+          "line1": "Coil voltage and mounting options",
+          "line2": "Engineering review included",
+          "final_url": "/services/oem/"
+        },
+        {
+          "text": "Certifications",
+          "line1": "UL, CE and RoHS documentation",
+          "line2": "Download compliance files",
+          "final_url": "/quality/certifications/"
+        },
+        {
+          "text": "About HIITIO",
+          "line1": "15 years in switchgear supply",
+          "line2": "Factory-direct manufacturing",
+          "final_url": "/about/"
+        },
+        {
+          "text": "Contact Sales",
+          "line1": "Send your specification",
+          "line2": "Quote within 1 business day",
+          "final_url": "/contact/"
+        }
+      ],
+      "callouts": [
+        "Factory Direct Pricing",
+        "UL & CE Certified",
+        "Samples Available",
+        "OEM & ODM Support",
+        "15 Years Experience"
+      ],
+      "snippets": [
+        {
+          "header": "Types",
+          "values": [
+            "HVDC Contactor",
+            "DC Relay",
+            "Precharge Contactor",
+            "Fuse Holder"
+          ]
+        },
+        {
+          "header": "Features",
+          "values": [
+            "Sealed Arc Chamber",
+            "1000V DC Rating",
+            "Low Contact Resistance"
+          ]
+        }
+      ]
+    },
+    {
+      "group_name": "DC Fuse",
+      "keywords": [
+        "dc fuse",
+        "solar dc fuse",
+        "high voltage dc fuse"
+      ],
+      "headlines": [
+        "High Voltage DC Fuse Maker",
+        "DC Fuses for Solar Arrays",
+        "Direct from the Factory",
+        "Custom Ratings Available",
+        "Order a Sample First",
+        "Get a Quote in 24 Hours",
+        "Download Full Specs Now",
+        "Ask Our Technical Team",
+        "IEC & UL Listed Fuses",
+        "Supply Partner Since 2010",
+        "Multiple Trip Curves",
+        "Volume Pricing for OEMs",
+        "Stocked and Ready to Ship",
+        "HIITIO",
+        "Talk to a Fuse Specialist",
+        "Fuse Holders Also Available",
+        "Tested to IEC 60269",
+        "Compact DIN Rail Mounting"
+      ],
+      "descriptions": [
+        "High voltage DC fuses for solar strings and battery storage. IEC and UL listed.",
+        "Factory-direct supply with custom ratings. Send your requirement for a 24-hour quote.",
+        "Multiple trip curves and DIN rail fuse holders available. Full specifications on request.",
+        "Serving OEM and distributor buyers since 2010. Samples ship before volume orders.",
+        "Our technical team helps you size the right fuse for your string configuration."
+      ],
+      "paths": [
+        "fuses",
+        "dc-fuse"
+      ],
+      "sitelinks": [
+        {
+          "text": "DC Fuse Range",
+          "line1": "Browse ratings and trip curves",
+          "line2": "Filter by voltage class",
+          "final_url": "/products/dc-fuse/"
+        },
+        {
+          "text": "Technical Specs",
+          "line1": "IEC 60269 test results",
+          "line2": "Download the datasheets",
+          "final_url": "/support/datasheets/"
+        },
+        {
+          "text": "Fuse Holders",
+          "line1": "DIN rail mounting options",
+          "line2": "Match to your fuse series",
+          "final_url": "/products/fuse-holder/"
+        },
+        {
+          "text": "Compliance Files",
+          "line1": "IEC and UL listings",
+          "line2": "Certificates on request",
+          "final_url": "/quality/certifications/"
+        },
+        {
+          "text": "About HIITIO",
+          "line1": "Switchgear supply specialists",
+          "line2": "Factory-direct since 2010",
+          "final_url": "/about/"
+        },
+        {
+          "text": "Contact Sales",
+          "line1": "Send your fuse requirement",
+          "line2": "Quote within 24 hours",
+          "final_url": "/contact/"
+        }
+      ],
+      "callouts": [
+        "IEC & UL Listed",
+        "Custom Ratings",
+        "Factory Direct",
+        "Fast Sampling",
+        "Volume Discounts"
+      ],
+      "snippets": [
+        {
+          "header": "Types",
+          "values": [
+            "DC Fuse",
+            "Solar Fuse",
+            "Fuse Holder",
+            "Battery Fuse"
+          ]
+        },
+        {
+          "header": "Compatible With",
+          "values": [
+            "Solar Strings",
+            "Battery Storage",
+            "EV Chargers"
+          ]
+        }
+      ]
+    }
+  ]
+}

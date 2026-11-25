@@ -1,0 +1,23 @@
+# 导出产物
+dist/
+*.csv
+*.xlsx
+*_review.html
+*_copy.md
+!examples/*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 截图
+shots/
+*.png
+
+# 系统
+.DS_Store
+Thumbs.db
+desktop.ini
