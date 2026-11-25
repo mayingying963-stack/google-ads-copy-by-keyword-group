@@ -163,8 +163,11 @@ def check_text_policies(group, field, text, *, wholesale_mode=True):
     low = text.lower()
 
     # 全大写（允许单个词如 USA、UL、CE、OEM、BMS 等缩略语）
-    words = [w for w in re.findall(r"[A-Za-z]{3,}", text)]
-    if words and all(w.isupper() for w in words) and len(words) > 1:
+    # 品牌名 / 型号常为全大写且带连字符（如 ACME-ESPRESSO、HVC-1000），不应误判。
+    # 规则：先把连字符连接的词看作整体，若整条只有 1 个"词"（品牌/型号）则放行；
+    #      2 个以上词且全部大写才判违规。
+    words = [w for w in re.findall(r"[A-Za-z][A-Za-z\-]{2,}", text)]
+    if len(words) > 1 and all(w.isupper() for w in words):
         issues.append(_err(group, field, "整条全大写（Google 会拒绝）", text))
 
     # 连续标点
@@ -538,8 +541,22 @@ def selftest():
     print("\n" + "=" * 50)
     print(f"良构样本无误报: {'OK' if ok1 else 'FAIL'}")
     print(f"坏构样本全命中: {'OK' if ok2 else 'FAIL'}")
+
+    # 全大写判定回归：品牌名/型号/标准号必须放行，多词全大写必须拦截
+    def _all_caps_flag(text):
+        return any("全大写" in i["message"]
+                   for i in check_text_policies("t", "headline", text))
+
+    caps_cases = [
+        ("HIITIO", False), ("HVC-1000", False), ("ACME-ESPRESSO", False),
+        ("UL1973", False), ("FACTORY DIRECT SUPPLIER", True),
+        ("BEST BATTERY SUPPLIER", True), ("FREE SHIPPING ON ALL ORDERS", True),
+    ]
+    caps_bad = [(t, e) for t, e in caps_cases if _all_caps_flag(t) != e]
+    print(f"全大写判定回归: {'OK' if not caps_bad else 'FAIL ' + str(caps_bad)}")
+    ok3 = not caps_bad
     print("=" * 50)
-    return 0 if (ok1 and ok2) else 1
+    return 0 if (ok1 and ok2 and ok3) else 1
 
 
 def main():

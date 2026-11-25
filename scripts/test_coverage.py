@@ -36,7 +36,48 @@ cases = [
     ("摘要值<3", lambda p: p['groups'][0]['snippets'][1].__setitem__('values', ["One","Two"]), "需 3"),
     ("路径超15", lambda p: p['groups'][0].__setitem__('paths', ["a"*16]), "上限 15"),
     ("路径含空格", lambda p: p['groups'][0].__setitem__('paths', ["hv dc"]), "空格"),
+    # 通用性：换品牌/行业后必须仍能跑通（品牌名不得被误判）
 ]
+
+# 通用性用例：虚构品牌 + 完全不同的行业（咖啡设备），验证 skill 不绑定任何具体站点
+def make_generic(p):
+    p['brand'] = 'ACME-ESPRESSO'
+    p['site'] = 'https://example.com'
+    p['target_audience'] = '咖啡馆采购与设备经销商'
+    g = p['groups'][0]
+    g['group_name'] = 'Commercial Espresso Machine'
+    g['keywords'] = ['commercial espresso machine', 'cafe espresso maker']
+    g['headlines'] = [
+        "Commercial Espresso Machine", "Cafe Espresso Maker Supplier",
+        "Factory Direct, No Middleman", "OEM Branding Available",
+        "Certified for Commercial Use", "Request a Demo Today",
+        "Get Spec Sheets Instantly", "Talk to Our Technicians",
+        "Compare Boiler Configurations", "Download Pricing Guide",
+        "Dual Boiler Heat Stability", "Stainless Steel Build",
+        "NSF Certified Components", "ACME-ESPRESSO",
+        "Book a Showroom Visit", "Pump Pressure Precisely Set",
+        "Service Network Included", "Low Maintenance Design",
+    ]
+    g['descriptions'] = [
+        "Commercial espresso machines for cafes and restaurants. NSF certified parts.",
+        "Factory-direct supply with OEM branding options. Quotes within one business day.",
+        "Dual boiler design holds brew temperature within tight tolerance at peak service.",
+        "Supplying cafe operators and equipment dealers since 2009. Demo before volume.",
+        "Custom voltage and plumbing configurations. Technicians help you specify.",
+    ]
+    g['paths'] = ['espresso', 'commercial']
+    g['callouts'] = ["NSF Certified", "Factory Direct Pricing", "Demo Available",
+                     "OEM Branding", "15 Years Experience"]
+    g['sitelinks'][0].update({'text': "Espresso Machine Range",
+                              'line1': "Compare boiler configurations",
+                              'line2': "Filter by group size"})
+    g['snippets'][0].update({'header': "Types",
+                             'values': ["Dual Boiler", "Heat Exchange", "Single Group"]})
+    g['snippets'][1].update({'header': "Features",
+                             'values': ["PID Control", "Stainless Steel", "NSF Certified"]})
+    p['groups'] = [g]
+
+generic_case = ("通用性:虚构品牌异行业", make_generic, None)
 
 print("=" * 72)
 print("校验器能力验证")
@@ -45,7 +86,7 @@ print("=" * 72)
 passed = 0
 failed = []
 
-for name, mutate, expect in cases:
+for name, mutate, expect in cases + [generic_case]:
     p = json.loads(json.dumps(base))
     mutate(p)
     code, out = run(p)
@@ -74,7 +115,7 @@ if retail_ok:
 else:
     failed.append(("零售模式", "仍报免邮", out[-300:]))
 
-total = len(cases) + 1
+total = len(cases) + 2
 print("\n" + "=" * 72)
 print(f"结果：{passed}/{total} 通过")
 if failed:
